@@ -17,27 +17,27 @@
 </head>
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-    <nav class="navbar navbar-expand-sm navbar-light bg-light px-5 py-2 mb-5">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-5 px-5 py-2">
         <a class="navbar-brand" href="{{ url('/') }}">Weather App</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
             aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <div class="navbar-collapse collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mt-lg-0 mr-auto mt-2">
             </ul>
-            <ul class="navbar-nav ml-auto mt-2 my-lg-0 text-right">
+            <ul class="navbar-nav my-lg-0 ml-auto mt-2 text-right">
                 @if (Auth()->check())
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">{{ Auth()->user()->name }}</a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownId">
-                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
                             <div class="dropdown-divider"></div>
-                            <form method="POST" action="https://www.weatherapp.test/logout">
+                            <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <a class="dropdown-item" href="https://www.weatherapp.test/logout"
+                                <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">Log
                                     Out</a>
@@ -54,30 +54,30 @@
     </nav>
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
 
-        <div class="container-fluid my-4 weather-data">
+        <div class="container-fluid weather-data my-4">
             <div class="row">
                 <div class="col-xxl-3 col-md-4 px-lg-4">
                     <h5 class="h5 text-center">Search By City</h5>
                     @if (Auth()->check())
                         <form onsubmit="return false;">
 
-                            <input type="text" id="city-input" class="py-2 form-control"
+                            <input type="text" id="city-input" class="form-control py-2"
                                 placeholder="E.g., New York, London, Tokyo">
-                            <button id="search-btn" class="btn btn-primary py-2 w-100 mt-3 mb-2">Search</button>
+                            <button id="search-btn" class="btn btn-primary w-100 mb-2 mt-3 py-2">Search</button>
                         </form>
                     @else
-                        <a href="{{ route('login') }}" class="btn btn-primary py-2 w-100 mt-3 mb-2">Login To
+                        <a href="{{ route('login') }}" class="btn btn-primary w-100 mb-2 mt-3 py-2">Login To
                             Continue</a>
                         <div class="text-center">
                             or
                         </div>
-                        <a href="{{ route('register') }}" class="btn btn-primary py-2 w-100 mt-3 mb-2">Register Your
+                        <a href="{{ route('register') }}" class="btn btn-primary w-100 mb-2 mt-3 py-2">Register Your
                             Account</a>
                     @endif
                 </div>
-                <div class="col-xxl-9 col-md-8 mt-md-1 mt-4 pe-lg-4">
-                    <div class="current-weather bg-primary text-white py-2 px-4 rounded-3">
-                        <div class="mt-3 d-flex justify-content-between">
+                <div class="col-xxl-9 col-md-8 mt-md-1 pe-lg-4 mt-4">
+                    <div class="current-weather bg-primary rounded-3 px-4 py-2 text-white">
+                        <div class="d-flex justify-content-between mt-3">
                             <div>
                                 <h3 class="fw-bold">_______ ( ______ )</h3>
                                 <h6 class="my-3 mt-3">Temperature: __°C</h6>
@@ -90,7 +90,7 @@
                     <div
                         class="days-forecast row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-xl-5 justify-content-between">
                         <div class="col mb-3">
-                            <div class="card border-0 bg-secondary text-white">
+                            <div class="card bg-secondary border-0 text-white">
                                 <div class="card-body p-3 text-white">
                                     <h5 class="card-title fw-semibold">( ______ )</h5>
                                     <h6 class="card-text my-3 mt-3">Temp: __°C</h6>
@@ -100,7 +100,7 @@
                             </div>
                         </div>
                         <div class="col mb-3">
-                            <div class="card border-0 bg-secondary text-white">
+                            <div class="card bg-secondary border-0 text-white">
                                 <div class="card-body p-3 text-white">
                                     <h5 class="card-title fw-semibold">( ______ )</h5>
                                     <h6 class="card-text my-3 mt-3">Temp: __°C</h6>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         <div class="col mb-3">
-                            <div class="card border-0 bg-secondary text-white">
+                            <div class="card bg-secondary border-0 text-white">
                                 <div class="card-body p-3 text-white">
                                     <h5 class="card-title fw-semibold">( ______ )</h5>
                                     <h6 class="card-text my-3 mt-3">Temp: __°C</h6>
@@ -120,7 +120,7 @@
                             </div>
                         </div>
                         <div class="col mb-3">
-                            <div class="card border-0 bg-secondary text-white">
+                            <div class="card bg-secondary border-0 text-white">
                                 <div class="card-body p-3 text-white">
                                     <h5 class="card-title fw-semibold">( ______ )</h5>
                                     <h6 class="card-text my-3 mt-3">Temp: __°C</h6>
@@ -130,7 +130,7 @@
                             </div>
                         </div>
                         <div class="col mb-3">
-                            <div class="card border-0 bg-secondary text-white">
+                            <div class="card bg-secondary border-0 text-white">
                                 <div class="card-body p-3 text-white">
                                     <h5 class="card-title fw-semibold">( ______ )</h5>
                                     <h6 class="card-text my-3 mt-3">Temp: __°C</h6>
